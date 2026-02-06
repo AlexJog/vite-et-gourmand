@@ -5,13 +5,19 @@ session_start();
 // Définir l'URL de base
 define('BASE_URL', '/');
 
-// Récupérer les variables d'environnement Heroku (ClearDB)
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+// Récupérer les variables d'environnement Heroku (JawsDB)
+$jawsdb_url = getenv("JAWSDB_URL");
 
-define('DB_HOST', $url["host"]);
-define('DB_NAME', substr($url["path"], 1));
-define('DB_USER', $url["user"]);
-define('DB_PASS', $url["pass"]);
+if ($jawsdb_url) {
+    $url = parse_url($jawsdb_url);
+    
+    define('DB_HOST', $url["host"]);
+    define('DB_NAME', substr($url["path"], 1));
+    define('DB_USER', $url["user"]);
+    define('DB_PASS', $url["pass"]);
+} else {
+    die("Erreur : JAWSDB_URL non configuré sur Heroku");
+}
 
 // Connexion PDO
 try {
