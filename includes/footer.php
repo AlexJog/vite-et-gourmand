@@ -1,0 +1,39 @@
+<footer class="site-footer">
+    <div class="div-footer">
+        
+        <!-- HORAIRES -->
+        <div>
+            <h3>Horaires d'ouverture</h3>
+            <p>Lundi - Vendredi : 9h - 18h</p>
+            <p>Samedi : 10h - 16h</p>
+            <p>Dimanche : Fermé</p>
+        </div>
+        
+        <!-- CONTACT -->
+        <div>
+            <h3>Contact</h3>
+            <p>📧 contact@vitegourmand.fr</p>
+            <p>📞 05 56 00 00 00</p>
+            <p>📍 Bordeaux, France</p>
+        </div>
+        
+        <!-- INFORMATIONS LÉGALES -->
+        <div>
+            <h3>Informations légales</h3>
+            <ul>
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Conditions générales de vente</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    
+    <p class="copyright">© 2025 Vite & Gourmand – Tous droits réservés</p>
+</footer>
+
+<!-- Script pour le menu burger -->
+<script src="/assets/js/main.js"></script>
+
+</body>
+</html>

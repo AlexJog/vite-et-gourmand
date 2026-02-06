@@ -1,0 +1,17 @@
+# Configuration locale
+includes/config.php
+
+# Données JSON
+data/stats.json
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
