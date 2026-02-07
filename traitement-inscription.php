@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/config.php';
+require_once 'includes/mailer.php';
 
 // Vérifier que le formulaire a été soumis en POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -130,9 +131,10 @@ $headers = "From: noreply@vitegourmand.fr\r\n";
 $headers .= "Reply-To: contact@vitegourmand.fr\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-$sent = mail($destinataire, $sujet, $message, $headers);
-if (!$sent) {
-    error_log("Email bienvenue NON envoyé à $destinataire via mail()");
+$ok = sendWelcomeMail($email, $sujet, $message);
+
+if (!$ok) {
+    error_log("Email bienvenue NON envoyé à $email via SMTP");
 }
 
 $_SESSION['succes_inscription'] = "Votre compte a été créé avec succès ! Un email de bienvenue vous a été envoyé.";
