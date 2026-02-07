@@ -53,7 +53,7 @@ if ($user) {
     // Envoyer le mail
     $destinataire = $email;
     $sujet = "Réinitialisation de votre mot de passe - Vite & Gourmand";
-    $lien = "http://localhost:3000/nouveau-mot-de-passe.php?token=$token";
+    $lien = "https://vite-et-gourmand-alex-a85135b73360.herokuapp.com/nouveau-mot-de-passe.php?token=$token";
 
     $message = "
 Bonjour {$user['prenom']} {$user['nom']},

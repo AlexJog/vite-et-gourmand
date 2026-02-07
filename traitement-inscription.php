@@ -130,7 +130,10 @@ $headers = "From: noreply@vitegourmand.fr\r\n";
 $headers .= "Reply-To: contact@vitegourmand.fr\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-@mail($destinataire, $sujet, $message, $headers);
+$sent = mail($destinataire, $sujet, $message, $headers);
+if (!$sent) {
+    error_log("Email bienvenue NON envoyé à $destinataire via mail()");
+}
 
 $_SESSION['succes_inscription'] = "Votre compte a été créé avec succès ! Un email de bienvenue vous a été envoyé.";
 header('Location: connexion.php');
