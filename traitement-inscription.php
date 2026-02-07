@@ -131,7 +131,9 @@ $headers = "From: noreply@vitegourmand.fr\r\n";
 $headers .= "Reply-To: contact@vitegourmand.fr\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
+error_log("TEST MAIL: tentative envoi bienvenue à $email (from=" . getenv('MAIL_FROM') . ")"); // a supp 
 $ok = sendWelcomeMail($email, $sujet, $message);
+error_log("TEST MAIL: resultat=" . ($ok ? "OK" : "FAIL")); // a supp
 
 if (!$ok) {
     error_log("Email bienvenue NON envoyé à $email via SMTP");
