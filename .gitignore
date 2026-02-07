@@ -1,5 +1,5 @@
 # Configuration locale
-includes/config.php
+# includes/config.php
 
 # Données JSON
 data/stats.json
