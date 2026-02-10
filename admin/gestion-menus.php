@@ -65,7 +65,7 @@ $menus = $stmt->fetchAll();
                         <div class="menu-admin-carte">
                             
                             <!-- Image -->
-                            <?php $image = !empty($menu['image_url']) ? $menu['image_url'] : '/assets/images/menus/menu-default.jpg';?>
+                            <?php $image = !empty($menu['image_url']) ? $menu['image_url'] : '../assets/images/menus/menu-default.jpg';?>
                             <img src="<?php echo htmlspecialchars($image); ?>" alt="<?php echo htmlspecialchars($menu['nom']); ?>" class="menu-admin-image">
                             
                             <!-- Informations -->
