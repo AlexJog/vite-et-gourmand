@@ -63,7 +63,7 @@ $menus = $stmt->fetchAll();
                         <div class="menu-admin-carte">
                             
                             <!-- Image -->
-                            <?php $image = !empty($menu['image_url']) ? $menu['image_url'] : '/assets/images/menus/default.jpg';?>
+                            <?php $image = !empty($menu['image_url']) ? $menu['image_url'] : '/assets/images/menus/menu-default.jpg';?>
                             <img src="<?php echo htmlspecialchars($image); ?>" alt="<?php echo htmlspecialchars($menu['nom']); ?>" class="menu-admin-image">
                             
                             <!-- Informations -->
@@ -88,7 +88,7 @@ $menus = $stmt->fetchAll();
                                 <a href="modifier-menu.php?id=<?php echo $menu['menu_id']; ?>" class="btn-menu-modifier">
                                     ✏️ Modifier
                                 </a>
-                                <a href="supprimer-menu.php?id=<?php echo $menu['menu_id']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce menu ?')" class="btn-menu-supprimer">
+                                <a href="#" onclick="afficherPopup('supprimer-menu.php?id=<?php echo $menu['menu_id']; ?>')" class="btn-menu-supprimer">
                                     🗑️ Supprimer
                                 </a>
                             </div>
@@ -102,6 +102,18 @@ $menus = $stmt->fetchAll();
             
         </div>
     </section>
+
+    <!-- Popup de confirmation de suppression -->
+    <div class="popup-overlay" id="popupSuppression">
+        <div class="popup-box">
+            <h3>⚠️ Confirmation de suppression</h3>
+            <p>Êtes-vous sûr de vouloir supprimer ce menu ?<br>Cette action est irréversible.</p>
+            <div class="popup-actions">
+                <button class="popup-btn popup-btn-annuler" onclick="fermerPopup()">Annuler</button>
+                <a href="#" id="lienSuppression" class="popup-btn popup-btn-confirmer" style="text-decoration: none;">Supprimer</a>
+            </div>
+        </div>
+    </div>
 </main>
 
 <?php require_once '../includes/footer.php'; ?>

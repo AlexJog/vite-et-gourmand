@@ -30,3 +30,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Fonction pour afficher la popup de suppression
+function afficherPopup(lien) {
+    document.getElementById('popupSuppression').classList.add('active');
+    document.getElementById('lienSuppression').href = lien;
+}
+
+// Fonction pour fermer la popup
+function fermerPopup() {
+    document.getElementById('popupSuppression').classList.remove('active');
+}
+
+// Fermer la popup si on clique en dehors
+document.addEventListener('click', function(e) {
+    const popup = document.getElementById('popupSuppression');
+    if (e.target === popup) {
+        fermerPopup();
+    }
+});
