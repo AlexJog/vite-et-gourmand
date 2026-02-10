@@ -20,7 +20,7 @@ $menus = $stmt->fetchAll();
 ?>
 <?php require_once '../includes/header.php'; ?>
 
-<script src="/assets/js/main.js"></script>
+<script src="../assets/js/main.js"></script>
 
 <main>
     <section class="contact-section">
