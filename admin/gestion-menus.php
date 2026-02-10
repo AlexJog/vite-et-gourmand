@@ -90,7 +90,7 @@ $menus = $stmt->fetchAll();
                                 <a href="modifier-menu.php?id=<?php echo $menu['menu_id']; ?>" class="btn-menu-modifier">
                                     ✏️ Modifier
                                 </a>
-                                <a href="supprimer-menu.php?id=<?php echo $menu['menu_id']; ?>" onclick="afficherPopup('supprimer-menu.php?id=<?php echo $menu['menu_id']; ?>', event); return false;" class="btn-menu-supprimer">
+                                <a href="#" onclick="afficherPopup('supprimer-menu.php?id=<?php echo $menu['menu_id']; ?>', event)" class="btn-menu-supprimer">
                                     🗑️ Supprimer
                                 </a>
                             </div>

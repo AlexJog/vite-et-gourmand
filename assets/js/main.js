@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Fonction pour afficher la popup de suppression
-function afficherPopup(lien) {
+function afficherPopup(lien, event) {
+    event.preventDefault(); // ← IMPORTANT ! Empêche la navigation
     document.getElementById('popupSuppression').classList.add('active');
     document.getElementById('lienSuppression').href = lien;
 }
@@ -43,9 +44,13 @@ function fermerPopup() {
 }
 
 // Fermer la popup si on clique en dehors
-document.addEventListener('click', function(e) {
+document.addEventListener('DOMContentLoaded', function() {
     const popup = document.getElementById('popupSuppression');
-    if (e.target === popup) {
-        fermerPopup();
+    if (popup) {
+        popup.addEventListener('click', function(e) {
+            if (e.target === this) {
+                fermerPopup();
+            }
+        });
     }
 });
