@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/config.php';
+require_once 'includes/email-functions.php';
 
 // Vérifier que le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -50,13 +51,10 @@ if ($user) {
         'id' => $user['utilisateur_id']
     ]);
     
-    // Envoyer le mail
-    $destinataire = $email;
-    $sujet = "Réinitialisation de votre mot de passe - Vite & Gourmand";
+    // Préparer le lien et le message
     $lien = "https://vite-et-gourmand-alex-a85135b73360.herokuapp.com/nouveau-mot-de-passe.php?token=$token";
 
-    $message = "
-Bonjour {$user['prenom']} {$user['nom']},
+    $message = "Bonjour {$user['prenom']} {$user['nom']},
 
 Vous avez demandé à réinitialiser votre mot de passe sur Vite & Gourmand.
 
@@ -69,14 +67,15 @@ Si vous n'avez pas demandé cette réinitialisation, ignorez simplement cet emai
 
 L'équipe Vite & Gourmand
 05 56 00 00 00
-contact@vitegourmand.fr
-";
+contact@vitegourmand.fr";
     
-    $headers = "From: noreply@vitegourmand.fr\r\n";
-    $headers .= "Reply-To: contact@vitegourmand.fr\r\n";
-    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-    
-    @mail($destinataire, $sujet, $message, $headers);
+    // Envoyer l'email avec Brevo
+    envoyerEmail(
+        $email,
+        $user['prenom'] . ' ' . $user['nom'],
+        'Réinitialisation de votre mot de passe - Vite & Gourmand',
+        $message
+    );
 }
 
 $_SESSION['succes_reset'] = "Si cette adresse email existe dans notre base, vous allez recevoir un lien de réinitialisation.";
