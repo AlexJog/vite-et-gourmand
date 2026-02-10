@@ -2408,7 +2408,7 @@ html {
 }
 
 .popup-overlay.active {
-    display: flex;
+    display: flex !important;
 }
 
 .popup-box {
@@ -2443,24 +2443,28 @@ html {
     cursor: pointer;
     font-size: 1rem;
     transition: all 0.3s;
+    text-decoration: none !important;
+    display: inline-block;
 }
 
 .popup-btn-confirmer {
-    background: #d9534f;
-    color: white;
+    background: #d9534f !important;
+    color: white !important;
+    border: none !important;
 }
 
 .popup-btn-confirmer:hover {
-    background: #c9302c;
+    background: #c9302c !important;
 }
 
 .popup-btn-annuler {
-    background: #6c757d;
-    color: white;
+    background: #6c757d !important;
+    color: white !important;
+    border: none !important;
 }
 
 .popup-btn-annuler:hover {
-    background: #5a6268;
+    background: #5a6268 !important;
 }
 
 /* Responsive gestion menus */
