@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/config.php';
+require_once 'includes/email-functions.php';
 
 // Vérifier que l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
@@ -160,10 +161,7 @@ try {
     
     $nom_menu = $menu['nom'];
     
-    $destinataire = $user['email'];
-    $sujet = "Confirmation de votre commande - Vite & Gourmand";
-    $message = "
-Bonjour {$user['prenom']} {$user['nom']},
+    $message = "Bonjour {$user['prenom']} {$user['nom']},
 
 Nous avons bien reçu votre commande !
 
@@ -181,37 +179,38 @@ $code_postal $ville
 Prix détaillé :
 - Prix menu : " . number_format(($prix_menu + $reduction), 2, ',', ' ') . " €";
 
-if ($reduction > 0) {
-    $message .= "
+    if ($reduction > 0) {
+        $message .= "
 - Réduction 10% : -" . number_format($reduction, 2, ',', ' ') . " €";
-}
+    }
 
-if ($frais_livraison > 0) {
-    $message .= "
+    if ($frais_livraison > 0) {
+        $message .= "
 - Frais de livraison : " . number_format($frais_livraison, 2, ',', ' ') . " €";
-}
+    }
 
-$message .= "
+    $message .= "
 TOTAL : " . number_format($prix_total, 2, ',', ' ') . " €
 
 Votre commande sera traitée dans les plus brefs délais par notre équipe.
 Vous recevrez une notification dès que votre commande sera validée.
 
 Vous pouvez suivre l'état de votre commande dans votre espace client :
-→ https://vitegourmand.fr/utilisateur/mes-commandes.php
+→ https://vite-et-gourmand-alex-a85135b73360.herokuapp.com/utilisateur/mes-commandes.php
 
 Merci de votre confiance !
 
 L'équipe Vite & Gourmand
 05 56 00 00 00
-contact@vitegourmand.fr
-";
+contact@vitegourmand.fr";
     
-    $headers = "From: noreply@vitegourmand.fr\r\n";
-    $headers .= "Reply-To: contact@vitegourmand.fr\r\n";
-    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-    
-    @mail($destinataire, $sujet, $message, $headers);
+    // Envoyer l'email avec Brevo
+    envoyerEmail(
+        $user['email'],
+        $user['prenom'] . ' ' . $user['nom'],
+        'Confirmation de votre commande - Vite & Gourmand',
+        $message
+    );
     
     // Valider la transaction
     $pdo->commit();
