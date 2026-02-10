@@ -70,8 +70,7 @@
                                 name="message" 
                                 rows="6"
                                 placeholder="Décrivez votre demande..."
-                                required>
-                            <?php echo isset($_SESSION['form_contact']['message']) ? htmlspecialchars($_SESSION['form_contact']['message']) : ''; ?></textarea>
+                                required><?php echo isset($_SESSION['form_contact']['message']) ? htmlspecialchars($_SESSION['form_contact']['message']) : ''; ?></textarea>
                         </div>
                         
                         <!-- Bouton Envoyer -->

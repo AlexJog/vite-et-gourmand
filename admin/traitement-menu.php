@@ -19,6 +19,14 @@ $action = $_POST['action'];
 // FONCTION UPLOAD IMAGE
 function uploadImage($file) {
     
+    // Sur Heroku : utiliser une image par défaut
+    if (getenv("JAWSDB_URL")) {
+        error_log("Upload sur Heroku : utilisation image par défaut");
+        return ['erreur' => false, 'chemin' => '/assets/images/menus/menu-default.jpg'];
+    }
+    
+    // EN LOCAL : upload normal
+    
     // Vérifier qu'un fichier a été uploadé
     if (!isset($file) || $file['error'] === UPLOAD_ERR_NO_FILE) {
         return ['erreur' => true, 'message' => "Aucune image n'a été uploadée."];
