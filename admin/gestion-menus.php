@@ -20,6 +20,8 @@ $menus = $stmt->fetchAll();
 ?>
 <?php require_once '../includes/header.php'; ?>
 
+<script src="/assets/js/main.js"></script>
+
 <main>
     <section class="contact-section">
         <div class="container">
@@ -88,7 +90,7 @@ $menus = $stmt->fetchAll();
                                 <a href="modifier-menu.php?id=<?php echo $menu['menu_id']; ?>" class="btn-menu-modifier">
                                     ✏️ Modifier
                                 </a>
-                                <a href="#" onclick="afficherPopup('supprimer-menu.php?id=<?php echo $menu['menu_id']; ?>')" class="btn-menu-supprimer">
+                                <a href="supprimer-menu.php?id=<?php echo $menu['menu_id']; ?>" onclick="afficherPopup('supprimer-menu.php?id=<?php echo $menu['menu_id']; ?>', event); return false;" class="btn-menu-supprimer">
                                     🗑️ Supprimer
                                 </a>
                             </div>
@@ -114,6 +116,7 @@ $menus = $stmt->fetchAll();
             </div>
         </div>
     </div>
+
 </main>
 
 <?php require_once '../includes/footer.php'; ?>
