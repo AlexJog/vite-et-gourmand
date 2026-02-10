@@ -64,6 +64,10 @@ try {
         $_SESSION['user_role'] = $user['role_nom'];
         $_SESSION['user_adresse'] = $user['adresse_postale'];
         $_SESSION['first_login'] = true;
+
+        // Nettoyer les anciennes erreurs
+        unset($_SESSION['error']);
+        unset($_SESSION['erreurs_connexion']);
         
         if ($user['role_nom'] === 'admin') {
             header('Location: admin/dashboard.php');
