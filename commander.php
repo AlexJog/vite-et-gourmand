@@ -163,6 +163,7 @@ if ($menu['quantite_restante'] <= 0) {
                                 name="kilometres" 
                                 min="0"
                                 step="0.1"
+                                value="0"
                                 placeholder="Ex: 25"
                             >
                         </div>

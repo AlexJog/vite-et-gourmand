@@ -48,16 +48,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Afficher/masquer le champ kilomètres
     function toggleKilometres() {
-        if (checkboxHorsBordeaux.checked) {
-            divKilometres.style.display = 'block';
-            inputKilometres.required = true;
-        } else {
-            divKilometres.style.display = 'none';
-            inputKilometres.required = false;
-            inputKilometres.value = '';
+    if (checkboxHorsBordeaux.checked) {
+        divKilometres.style.display = 'block';
+        inputKilometres.setAttribute('required', 'required');
+        if (inputKilometres.value === '0') {
+            inputKilometres.value = ''; // Vider pour forcer la saisie
         }
-        calculerPrix();
+    } else {
+        divKilometres.style.display = 'none';
+        inputKilometres.removeAttribute('required');
+        inputKilometres.value = '0'; // Remettre à 0
     }
+    calculerPrix();
+}
 
     // Événements
     if (inputNbPersonnes) {

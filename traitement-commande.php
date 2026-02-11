@@ -42,6 +42,11 @@ if ($date_prestation < $date_min) {
     $erreurs[] = "La date de prestation doit être au minimum 7 jours après aujourd'hui.";
 }
 
+// Validation kilomètres si hors Bordeaux
+if ($hors_bordeaux && $kilometres <= 0) {
+    $erreurs[] = "Veuillez indiquer la distance en kilomètres pour une livraison hors Bordeaux.";
+}
+
 // Récupérer les infos du menu pour validation
 $sql_menu = "SELECT * FROM menu WHERE menu_id = :menu_id";
 $stmt_menu = $pdo->prepare($sql_menu);
