@@ -22,6 +22,22 @@ function ecrireStatsJSON($data) {
 
 // Fonction pour synchroniser MySQL vers JSON
 function synchroniserStatsJSON($pdo) {
+    
+    // Sur Heroku : simulation (pas d'écriture possible)
+    if (getenv("JAWSDB_URL")) {
+        error_log("Synchronisation JSON simulée sur Heroku (système de fichiers en lecture seule)");
+        
+        // Récupérer les commandes pour compter
+        $sql = "SELECT COUNT(*) as total FROM commande";
+        $stmt = $pdo->query($sql);
+        $result = $stmt->fetch();
+        
+        // Retourner true pour simuler le succès
+        return $result['total'];
+    }
+    
+    // EN LOCAL : synchronisation réelle
+    
     // Récupérer toutes les commandes depuis MySQL
     $sql = "SELECT 
                 c.commande_id,
@@ -68,6 +84,53 @@ function synchroniserStatsJSON($pdo) {
 
 // Fonction pour calculer les stats par menu
 function calculerStatsParMenu($filtres = []) {
+    global $pdo;
+    
+    // Sur Heroku : utiliser MySQL directement
+    if (getenv("JAWSDB_URL")) {
+        
+        // Construire la requête SQL avec filtres
+        $sql = "SELECT 
+                    m.nom AS menu_nom,
+                    m.menu_id,
+                    COUNT(*) AS nb_commandes,
+                    SUM(c.prix_total) AS chiffre_affaires,
+                    SUM(c.nombre_personnes) AS nb_personnes_total
+                FROM commande c
+                INNER JOIN menu m ON c.menu_id = m.menu_id
+                WHERE 1=1";
+        
+        $params = [];
+        
+        // Filtre par menu
+        if (isset($filtres['menu_id']) && !empty($filtres['menu_id'])) {
+            $sql .= " AND m.menu_id = :menu_id";
+            $params['menu_id'] = $filtres['menu_id'];
+        }
+        
+        // Filtre par date début
+        if (isset($filtres['date_debut']) && !empty($filtres['date_debut'])) {
+            $sql .= " AND c.date_commande >= :date_debut";
+            $params['date_debut'] = $filtres['date_debut'];
+        }
+        
+        // Filtre par date fin
+        if (isset($filtres['date_fin']) && !empty($filtres['date_fin'])) {
+            $sql .= " AND c.date_commande <= :date_fin";
+            $params['date_fin'] = $filtres['date_fin'] . ' 23:59:59';
+        }
+        
+        $sql .= " GROUP BY m.menu_id, m.nom
+                  ORDER BY nb_commandes DESC";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    // EN LOCAL : utiliser le fichier JSON
+    
     $data = lireStatsJSON();
     
     if (empty($data)) {
