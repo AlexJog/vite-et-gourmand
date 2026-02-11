@@ -228,6 +228,6 @@ if ($menu['quantite_restante'] <= 0) {
 </main>
 
 <!-- Script commande -->
-<script src="assets/js/commande.js"></script>
+<script src="<?= BASE_URL ?>assets/js/commande.js?v=<?= time() ?>"></script>
 
 <?php require_once 'includes/footer.php'; ?>
