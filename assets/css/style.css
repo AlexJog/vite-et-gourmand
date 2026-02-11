@@ -1755,8 +1755,44 @@ html {
     .commande-carte {
         padding: 20px;
     }
-}
 
+    /* Responsive menus */
+    .menu-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .menu-prix {
+        text-align: center;
+    }
+
+    .menu-personnes {
+        text-align: center;
+    }
+
+    /* Responsive index */
+
+    .div-grille {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .carte {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .avis-grid {
+        justify-items: center;
+    }
+
+    .avis-carte {
+        width: 100%;
+        max-width: 320px;
+    }
+    
+}
 /* ==== ÉLÉMENTS SPÉCIFIQUES gestion-commandes.php ==== */
 
 /* Grille statistiques */
