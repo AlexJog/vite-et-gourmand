@@ -91,6 +91,11 @@
                 <?php elseif ($_SESSION['user_role'] === 'admin'): ?>
                     <a href="/admin/dashboard.php" class="mobile-link">📊 Dashboard</a>
                     <a href="/admin/gestion-menus.php" class="mobile-link">🍽️ Menus</a>
+                    <a href="/admin/gestion-commandes.php" class="mobile-link">📦 Commandes</a>
+                    <a href="/admin/gestion-avis.php" class="mobile-link">⭐ Avis clients</a>
+                    <a href="/admin/gestion-employes.php" class="mobile-link">👥 Employés</a>
+                    <a href="/admin/statistiques.php" class="mobile-link">📈 Statistiques</a>
+                    <a href="/admin/creer-employe.php" class="mobile-link">➕ Créer employé</a>
                 <?php endif; ?>
             
                 <a href="/deconnexion.php" class="mobile-deconnexion">Déconnexion</a>
