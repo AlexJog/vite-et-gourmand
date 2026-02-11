@@ -19,6 +19,14 @@ $nb_commandes = $pdo->query($sql_commandes)->fetch()['nb_commandes'];
 // Compter le nombre d'utilisateurs
 $sql_users = "SELECT COUNT(*) as nb_users FROM utilisateur WHERE role_id = 3";
 $nb_users = $pdo->query($sql_users)->fetch()['nb_users'];
+
+// Compter les avis en attente
+$sql_avis = "SELECT COUNT(*) as nb_avis FROM avis WHERE valide = 0";
+$nb_avis_attente = $pdo->query($sql_avis)->fetch()['nb_avis'];
+
+// Compter les employés
+$sql_employes = "SELECT COUNT(*) as nb_employes FROM utilisateur WHERE role_id = 2";
+$nb_employes = $pdo->query($sql_employes)->fetch()['nb_employes'];
 ?>
 <?php require_once '../includes/header.php'; ?>
 
@@ -27,7 +35,7 @@ $nb_users = $pdo->query($sql_users)->fetch()['nb_users'];
         <div class="container">
             <div class="contact-header">
                 <h1>Espace Administrateur</h1>
-                <p>Bienvenue <?php echo htmlspecialchars($_SESSION['user_prenom']); ?> !</p>
+                <p>Bienvenue <?php echo htmlspecialchars($_SESSION['user_prenom']); ?> ! 👑</p>
             </div>
             
             <div class="dashboard-content">
@@ -58,11 +66,48 @@ $nb_users = $pdo->query($sql_users)->fetch()['nb_users'];
                     
                 </div>
                 
-                <!-- Actions -->
-                <div class="dashboard-card">
-                    <h2>📋 Gestion des Menus</h2>
-                    <p>Créer, modifier et supprimer les menus</p>
-                    <a href="gestion-menus.php" class="btn-hero">Gérer les menus</a>
+                <!-- Actions principales -->
+                <div class="dashboard-actions">
+                    
+                    <div class="dashboard-card">
+                        <h2>🍽️ Gestion des Menus</h2>
+                        <p>Créer, modifier et supprimer les menus</p>
+                        <a href="gestion-menus.php" class="btn-hero">Gérer les menus</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h2>📦 Gestion des Commandes</h2>
+                        <p>Valider, suivre et gérer toutes les commandes</p>
+                        <a href="gestion-commandes.php" class="btn-hero">Gérer les commandes</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h2>⭐ Gestion des Avis</h2>
+                        <p>Valider ou refuser les avis clients</p>
+                        <?php if ($nb_avis_attente > 0): ?>
+                            <p><strong style="color: #FFC107;">⚠️ <?php echo $nb_avis_attente; ?> avis en attente</strong></p>
+                        <?php endif; ?>
+                        <a href="gestion-avis.php" class="btn-hero">Gérer les avis</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h2>👥 Gestion des Employés</h2>
+                        <p>Voir et gérer les comptes employés (<?php echo $nb_employes; ?> employés)</p>
+                        <a href="gestion-employes.php" class="btn-hero">Gérer les employés</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h2>📈 Statistiques</h2>
+                        <p>Consulter les statistiques de ventes et performances</p>
+                        <a href="statistiques.php" class="btn-hero">Voir les statistiques</a>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h2>➕ Créer un Employé</h2>
+                        <p>Ajouter un nouveau compte employé</p>
+                        <a href="creer-employe.php" class="btn-secondary">Créer un employé</a>
+                    </div>
+                    
                 </div>
                 
             </div>
