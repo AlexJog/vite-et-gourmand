@@ -1,3 +1,4 @@
+<?php error_log("FOOTER included from: " . (__FILE__) . " | caller: " . ($_SERVER['SCRIPT_NAME'] ?? 'cli')); ?>
 <footer class="site-footer">
     <div class="div-footer">
         
