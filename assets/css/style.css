@@ -1770,27 +1770,6 @@ html {
     .menu-personnes {
         text-align: center;
     }
-
-    /* Responsive index */
-
-    .div-grille {
-        grid-template-columns: 1fr;
-        justify-items: center;
-    }
-
-    .carte {
-        width: 100%;
-        max-width: 320px;
-    }
-
-    .avis-grid {
-        justify-items: center;
-    }
-
-    .avis-carte {
-        width: 100%;
-        max-width: 320px;
-    }
     
 }
 /* ==== ÉLÉMENTS SPÉCIFIQUES gestion-commandes.php ==== */
@@ -3109,4 +3088,31 @@ html {
 .grille-menus .div-menus {
     grid-template-columns: repeat(2, 1fr);
 }
+}
+
+@media (max-width: 768px) {
+    /* Responsive index */
+
+  /* EXPERIENCE */
+  .div-grille{
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .carte{
+    width: 100%;
+    max-width: 320px;
+  }
+
+  /* AVIS */
+  .div-avis,
+  .avis-grid{
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .avis-carte{
+    width: 100%;
+    max-width: 320px;
+  }
 }
