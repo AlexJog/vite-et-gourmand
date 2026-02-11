@@ -21,7 +21,7 @@ $sql_users = "SELECT COUNT(*) as nb_users FROM utilisateur WHERE role_id = 3";
 $nb_users = $pdo->query($sql_users)->fetch()['nb_users'];
 
 // Compter les avis en attente
-$sql_avis = "SELECT COUNT(*) as nb_avis FROM avis WHERE valide = 0";
+$sql_avis = "SELECT COUNT(*) as nb_avis FROM avis WHERE statut = 'en attente'";
 $nb_avis_attente = $pdo->query($sql_avis)->fetch()['nb_avis'];
 
 // Compter les employés
